@@ -21,11 +21,11 @@ def index():
         token = token.split(' ')[1]
         try:
             kid = jwt.get_unverified_header(token)['kid']
-            c.execute("SELECT secret FROM users WHERE kid = ?", (kid,))
+            c.execute(f"SELECT secret FROM users WHERE kid = {kid}")
             secret = c.fetchone()
-            print(kid)
-            if secret:
-                decoded = jwt.decode(token, secret[0])
+            print(secret)
+            if secret != '':
+                decoded = jwt.decode(token, secret[0], algorithms="HS256")
                 print(decoded)
                 try:
                     if decoded['role'] == 'admin':
