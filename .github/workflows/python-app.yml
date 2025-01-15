@@ -42,7 +42,7 @@ jobs:
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags:  JWTLab:latest
+        tags:  JWTLab
     - name: Test with pytest
       run: |
         pytest
