@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: python:3.9-slim
 
     steps:
     - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags:  JWT_Lab:latest
+        tags:  JWT Lab:latest
     - name: Test with pytest
       run: |
         pytest
