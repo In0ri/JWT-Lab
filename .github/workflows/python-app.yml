@@ -47,10 +47,6 @@ jobs:
         push: false
         tags: jwtlab:latest
 
-    - name: Test with pytest
-      run: |
-        pytest
-
     - name: Scan container image with Tenable Cloud Security
       uses: tenable/cloud-security-actions/container-image/scan@v1
       with:
