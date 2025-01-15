@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -39,5 +39,21 @@ jobs:
       with:
         buildkitd-flags: --debug
 
-    - name: Build Docker image
-      uses: docker/build-push
+    - name: Build and push
+      uses: docker/setup-buildx-action@v2
+      with:
+        context: ./
+        file: ./Dockerfile
+        push: false
+        tags: jwtlab:latest
+
+    - name: Test with pytest
+      run: |
+        pytest
+
+    - name: Scan container image with Tenable Cloud Security
+      uses: tenable/cloud-security-actions/container-image/scan@v1
+      with:
+        api-token: ${{ secrets.TENABLE_API_TOKEN }}
+        api-url: https://sg.app.ermetic.com
+        name: jwtlab:latest
