@@ -52,4 +52,4 @@ jobs:
       with:
         api-token: ${{ secrets.TENABLE_API_TOKEN }}
         api-url: https://sg.app.ermetic.com
-        name: jwtlab:latest
+        name: jwtlab
